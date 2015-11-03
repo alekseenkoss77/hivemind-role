@@ -1,0 +1,5 @@
+---
+# tasks file for hivemind
+- name: Hivemind | Installing through Golang
+  shell: go get -u -f {{ hivemind_repo }}
+  when: hivemind_repo is defined
