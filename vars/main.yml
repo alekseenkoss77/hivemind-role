@@ -1,2 +1,3 @@
 ---
-# vars file for hivemind
+golang_env:
+  GOPATH: "{{golang_gopath}}"

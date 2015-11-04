@@ -6,16 +6,19 @@
   register: go_version
   changed_when: false
 
-- name: Hivemind | create directory
-  file: path=go state=directory
+- name: Install | Ensure that GOPATH exists
+  file: path={{ golang_gopath }} state=directory
+  sudo: yes
 
-- name: Hivemind | export GOPATH
-  shell: export GOPATH=$HOME/go
-  sudo: no
+- name: Install | Ensure that GOPATH is owned by current user
+  shell: chown -R {{ deploy_user }} {{ golang_gopath }}
+  sudo: yes
 
-- name: Hivemind | export PATH
-  shell: export PATH=$PATH:$GOPATH/bin
+- name: Configure | Set GOPATH for all users and add to PATH
+  copy: src=go-path.sh
+        dest=/etc/profile.d
+  sudo: yes
 
 - name: Hivemind | Installing through Golang
-  shell: go get -u {{ hivemind_repo }}
-  when: go_version is defined
+  command: go get {{ hivemind_repo }} creates={{golang_gopath}}/bin/hovemind
+  environment: golang_env
