@@ -7,7 +7,7 @@
   changed_when: false
 
 - name: Hivemind | create directory
-  file: path=$HOME/go state=directory
+  file: path=go state=directory
 
 - name: Hivemind | Set GOPATH for all users
   when: go_version is defined
