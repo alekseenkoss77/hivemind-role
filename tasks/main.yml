@@ -7,10 +7,10 @@
   changed_when: false
 
 - name: Hivemind | Set GOPATH for all users
-  when: go_path is defined
+  when: go_version is defined
   copy: src=go-path.sh
         dest=/etc/profile.d
 
 - name: Hivemind | Installing through Golang
-  shell: go get -u -f {{ hivemind_repo }}
+  shell: go get -u {{ hivemind_repo }}
   when: go_version is defined
