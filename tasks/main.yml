@@ -9,10 +9,11 @@
 - name: Hivemind | create directory
   file: path=go state=directory
 
-- name: Hivemind | Set GOPATH for all users
-  when: go_version is defined
-  copy: src=go-path.sh
-        dest=/etc/profile.d
+- name: Hivemind | export GOPATH
+  shell: export GOPATH=$HOME/go
+
+- name: Hivemind | export PATH
+  shell: export PATH=$PATH:$GOPATH/bin
 
 - name: Hivemind | Run shell
   shell: sh /etc/profile.d/go-path.sh
