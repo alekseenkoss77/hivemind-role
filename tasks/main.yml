@@ -1,5 +1,16 @@
 ---
 # tasks file for hivemind
+- name: Check installed Go and get version (if any)
+  command: /usr/local/go/bin/go version
+  ignore_errors: yes
+  register: go_version
+  changed_when: false
+
+- name: Hivemind | Set GOPATH for all users
+  when: go_path is defined
+  copy: src=go-path.sh
+        dest=/etc/profile.d
+
 - name: Hivemind | Installing through Golang
   shell: go get -u -f {{ hivemind_repo }}
-  when: hivemind_repo is defined
+  when: go_version is defined
