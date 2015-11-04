@@ -11,6 +11,7 @@
 
 - name: Hivemind | export GOPATH
   shell: export GOPATH=$HOME/go
+  sudo: no
 
 - name: Hivemind | export PATH
   shell: export PATH=$PATH:$GOPATH/bin
