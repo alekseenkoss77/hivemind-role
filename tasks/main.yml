@@ -15,10 +15,6 @@
 - name: Hivemind | export PATH
   shell: export PATH=$PATH:$GOPATH/bin
 
-- name: Hivemind | Run shell
-  shell: sh /etc/profile.d/go-path.sh
-  sudo: yes
-
 - name: Hivemind | Installing through Golang
   shell: go get -u {{ hivemind_repo }}
   when: go_version is defined
