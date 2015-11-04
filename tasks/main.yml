@@ -6,6 +6,9 @@
   register: go_version
   changed_when: false
 
+- name: Hivemind | create directory
+  shell: mkdir $HOME/go
+
 - name: Hivemind | Set GOPATH for all users
   when: go_version is defined
   copy: src=go-path.sh
